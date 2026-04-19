@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="auth-page">
+
+    <!-- LEFT SIDE -->
+    <div class="auth-left">
+        <h1>Join SpectraLearn</h1>
+        <p>
+            Create a personalized sensory-friendly learning experience
+            for every child.
+        </p>
+    </div>
+
+    <!-- FORM CARD -->
+    <div class="auth-card-modern">
+        <h2>Create Account</h2>
+
+        <form method="POST" action="/register">
+
+    <input type="text" name="username" placeholder="Username" required>
+
+    <input type="email" name="email" placeholder="Email" required>
+
+    <input type="password" name="password" placeholder="Password" required>
+
+    <select name="role" required>
+        <option value="">Select Role</option>
+        <option value="student">Student</option>
+        <option value="teacher">Teacher</option>
+    </select>
+
+    <button type="submit">Register</button>
+
+</form>
+
+        <p style="margin-top:10px;">
+            Already have an account? <a href="/login">Login</a>
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

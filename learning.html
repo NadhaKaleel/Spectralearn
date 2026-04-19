@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block content %}
+
+<a href="javascript:history.back()" class="back-link">← Back</a>
+
+<style>
+body.default-font {
+    font-family: Arial, sans-serif;
+}
+
+body.dyslexia-font {
+    font-family: 'Comic Sans MS', Arial, sans-serif;
+}
+
+.alphabet-container {
+    text-align: center;
+    padding: 50px;
+}
+
+.letter-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* reduced gap */
+    margin-bottom: 15px;
+}
+
+.capital {
+    font-size: 110px;  /* reduced size for 3 letters */
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.small {
+    font-size: 85px;
+    color: #27ae60;
+}
+
+.image-box img {
+    width: 220px; /* reduced */
+    border-radius: 15px;
+    box-shadow: 0px 6px 15px rgba(0,0,0,0.2);
+}
+
+.button-style {
+    margin: 10px;
+    padding: 10px 18px;
+    font-size: 14px;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.top-controls {
+    margin-bottom: 30px;
+    
+}
+.top-controls button:nth-child(2) {
+    display: none;
+}
+</style>
+
+<div class="alphabet-container">
+
+    <div class="top-controls">
+        <button class="button-style" onclick="toggleFont()">Toggle Dyslexia Font</button>
+    </div>
+
+    <!-- ✅ 3 LETTERS DISPLAY -->
+    <div style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap;">
+
+        {% for letter, small, image in letters %}
+
+        <div>
+            <div class="letter-box">
+                <div class="capital">{{ letter }}</div>
+                <div class="small">{{ small }}</div>
+            </div>
+
+            <div class="image-box">
+                <img src="{{ url_for('static', filename='images/' + image) }}">
+            </div>
+
+            <button class="button-style" onclick="speakLetter('{{ letter }}')">
+                🔊 Sound
+            </button>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <br><br>
+
+    <!-- ✅ NEXT BUTTON FIX -->
+    {% if next_page is not none %}
+        <a href="{{ url_for('learning', page=next_page) }}">
+            <button class="button-style">Next →</button>
+        </a>
+    {% else %}
+        <h3>🎉 Alphabet Completed!</h3>
+
+        <a href="/dashboard">
+            <button class="button-style">Back to Dashboard</button>
+        </a>
+    {% endif %}
+
+</div>
+
+<script>
+function toggleFont() {
+    if (document.body.classList.contains("dyslexia-font")) {
+        document.body.classList.remove("dyslexia-font");
+        document.body.classList.add("default-font");
+    } else {
+        document.body.classList.remove("default-font");
+        document.body.classList.add("dyslexia-font");
+    }
+}
+
+function speakLetter(letter) {
+    let speech = new SpeechSynthesisUtterance(letter);
+    speech.rate = 0.8;
+    window.speechSynthesis.speak(speech);
+}
+</script>
+
+{% endblock %}
