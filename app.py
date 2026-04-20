@@ -1,6 +1,8 @@
 
 from flask import Flask, render_template, request, redirect, session
-import sqlite3
+import os
+import psycopg2
+import sqlite3 #keep this for local testing
 import string
 import random
 
@@ -9,12 +11,18 @@ app.secret_key = "spectralearn"
 
 # ================= DATABASE =================
 def init_db():
-    conn = sqlite3.connect("database.db")
+    DATABASE_URL = os.environ.get("DATABASE_URL")
+
+    if DATABASE_URL:
+        conn = psycopg2.connect(DATABASE_URL)
+    else:
+        conn = sqlite3.connect("database.db")
+
     cursor = conn.cursor()
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
             username TEXT,
             email TEXT,
             password TEXT,
@@ -27,7 +35,6 @@ def init_db():
 
     conn.commit()
     conn.close()
-
 init_db()
 
 # ================= HOME =================
@@ -40,28 +47,31 @@ def home():
 def register():
 
     if request.method == "POST":
-
         username = request.form.get("username").strip()
         email = request.form.get("email").strip()
         password = request.form.get("password").strip()
         role = request.form.get("role").strip().lower()
 
-        conn = sqlite3.connect("database.db")
+        DATABASE_URL = os.environ.get("DATABASE_URL")
+
+        if DATABASE_URL:
+            conn = psycopg2.connect(DATABASE_URL)
+        else:
+            conn = sqlite3.connect("database.db")
+
         cursor = conn.cursor()
 
         cursor.execute(
-            "INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)",
+            "INSERT INTO users (username, email, password, role) VALUES (%s, %s, %s, %s)",
             (username, email, password, role)
         )
 
         conn.commit()
-
         conn.close()
 
         return redirect("/login")
 
     return render_template("register.html")
-
 # ================= LOGIN =================
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -73,16 +83,22 @@ def login():
 
         print("LOGIN INPUT:", username, password)
 
-        conn = sqlite3.connect("database.db")
+        DATABASE_URL = os.environ.get("DATABASE_URL")
+
+        if DATABASE_URL:
+            conn = psycopg2.connect(DATABASE_URL)
+        else:
+            conn = sqlite3.connect("database.db")
+
         cursor = conn.cursor()
 
-        # 🔍 SHOW ALL USERS
+        # 🔍 SHOW ALL USERS (debug)
         cursor.execute("SELECT username, password, role FROM users")
         print("ALL USERS:", cursor.fetchall())
 
         # 🔍 CHECK MATCH
         cursor.execute(
-            "SELECT * FROM users WHERE username=? AND password=?",
+            "SELECT * FROM users WHERE username=%s AND password=%s",
             (username, password)
         )
 
@@ -338,7 +354,13 @@ def teacher_dashboard():
     if "user" not in session or session.get("role") != "teacher":
         return redirect("/login")
 
-    conn = sqlite3.connect("database.db")
+    DATABASE_URL = os.environ.get("DATABASE_URL")
+
+    if DATABASE_URL:
+        conn = psycopg2.connect(DATABASE_URL)
+    else:
+        conn = sqlite3.connect("database.db")
+
     cursor = conn.cursor()
 
     cursor.execute("SELECT username, email FROM users WHERE role='student'")
@@ -355,7 +377,13 @@ def edit_student(username):
     if "user" not in session or session.get("role") != "teacher":
         return redirect("/login")
 
-    conn = sqlite3.connect("database.db")
+    DATABASE_URL = os.environ.get("DATABASE_URL")
+
+    if DATABASE_URL:
+        conn = psycopg2.connect(DATABASE_URL)
+    else:
+        conn = sqlite3.connect("database.db")
+
     cursor = conn.cursor()
 
     student = cursor.execute(
@@ -369,7 +397,8 @@ def edit_student(username):
         "edit_student.html",
         username=student[1],
         email=student[2]
-    )# ================= UPDATE STUDENT SETTINGS =================
+    )
+    # ================= UPDATE STUDENT SETTINGS =================
 @app.route("/update_student_settings/<username>", methods=["POST"])
 def update_student_settings(username):
 
@@ -383,14 +412,20 @@ def update_student_settings(username):
     # 🔥 ADD DEBUG HERE
     print("UPDATING:", username, theme, font_size, font_family)
 
-    conn = sqlite3.connect("database.db")
+    DATABASE_URL = os.environ.get("DATABASE_URL")
+
+    if DATABASE_URL:
+        conn = psycopg2.connect(DATABASE_URL)
+    else:
+        conn = sqlite3.connect("database.db")
+
     cursor = conn.cursor()
 
     cursor.execute("""
-        UPDATE users
-        SET theme=?, font_size=?, font_family=?
-        WHERE username=?
-    """, (theme, font_size, font_family, username))
+    UPDATE users
+    SET theme=%s, font_size=%s, font_family=%s
+    WHERE username=%s
+""", (theme, font_size, font_family, username))
 
     conn.commit()
     conn.close()
@@ -402,20 +437,8 @@ def update_student_settings(username):
 def logout():
     session.clear()
     return redirect("/")
-conn = sqlite3.connect("database.db")
-cursor = conn.cursor()
 
-cursor.execute("""
-DELETE FROM users
-WHERE rowid NOT IN (
-    SELECT MIN(rowid)
-    FROM users
-    GROUP BY username
-)
-""")
 
-conn.commit()
-conn.close()
 # ================= RUN =================
 if __name__ == "__main__":
     app.run(debug=True)
