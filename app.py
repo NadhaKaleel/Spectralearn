@@ -181,7 +181,6 @@ def emotions():
     if "user" not in session:
         return redirect("/login")
 
-    try:
         emotions_list = [
             ("Happy", "happy.png"),
             ("Sad", "sad.png"),
@@ -193,8 +192,7 @@ def emotions():
 
         return render_template("emotions.html", emotions=emotions_list)
 
-    except Exception as e:
-        return f"Error loading emotions: {e}"
+
 @app.route("/word_builder")
 def word_builder():
 
