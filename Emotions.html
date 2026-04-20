@@ -8,17 +8,21 @@
     <h1 class="module-title">Feelings & Emotions</h1>
 
     <p class="hint-text">
-    Tap the image to hear the emotion 🔊
-</p>
+        Tap the image to hear the emotion 🔊
+    </p>
 
     <div class="word-grid">
         {% for emotion, image in emotions %}
             <div class="word-card">
                 <h2>{{ emotion }}</h2>
 
-                <img src="{{ url_for('static', filename='images/' + image) }}"
+                <img src="{{ url_for('static', filename='images/' ~ image) }}"
+     alt="{{ emotion }}"
+     onerror="this.style.display='none'"
+     style="max-width:150px; cursor:pointer;"
+     onclick="speakEmotion('{{ emotion }}')">
                      onclick="speakEmotion('{{ emotion }}')"
-                     style="cursor:pointer;">
+                     style="cursor:pointer; max-width:150px;">
             </div>
         {% endfor %}
     </div>
@@ -27,12 +31,10 @@
 
 <script>
 function speakEmotion(text) {
-    window.speechSynthesis.cancel();  // stop previous sound
-
+    window.speechSynthesis.cancel();
     const speech = new SpeechSynthesisUtterance(text);
     speech.lang = "en-US";
     speech.rate = 0.85;
-
     window.speechSynthesis.speak(speech);
 }
 </script>

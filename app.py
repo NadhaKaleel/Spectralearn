@@ -48,6 +48,9 @@ def register():
 
         conn = sqlite3.connect("database.db")
         cursor = conn.cursor()
+        
+
+        
 
         cursor.execute(
             "INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)",
@@ -171,6 +174,27 @@ def learning():
         next_page=next_page
     )
 
+# ================= EMOTIONS MODULE =================
+@app.route("/emotions")
+def emotions():
+
+    if "user" not in session:
+        return redirect("/login")
+
+    try:
+        emotions_list = [
+            ("Happy", "happy.png"),
+            ("Sad", "sad.png"),
+            ("Angry", "angry.png"),
+            ("Surprised", "surprised.png"),
+            ("Scared", "scared.png"),
+            ("Excited", "excited.png"),
+        ]
+
+        return render_template("emotions.html", emotions=emotions_list)
+
+    except Exception as e:
+        return f"Error loading emotions: {e}"
 @app.route("/word_builder")
 def word_builder():
 
@@ -309,28 +333,6 @@ def numbers():
         next_page=next_page
     )
 
-# ================= EMOTIONS MODULE =================
-@app.route("/emotions")
-def emotions():
-
-    if "user" not in session:
-        return redirect("/login")
-
-    emotions_list = [
-        ("Happy", "happy.png"),
-        ("Sad", "sad.png"),
-        ("Angry", "angry.png"),
-        ("Surprised", "surprised.png"),
-        ("Scared", "scared.png"),
-        ("Excited", "excited.png"),
-        ("shy", "shy.png"),
-        ("Bored" , "bored.png")
-        
-    ]
-
-    return render_template("emotions.html", emotions=emotions_list)
-
-
 
 # ================= TEACHER DASHBOARD =================
 @app.route("/teacher_dashboard")
@@ -341,7 +343,7 @@ def teacher_dashboard():
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
 
-    cursor.execute("SELECT username, email FROM users WHERE role='student'")
+    cursor.execute("SELECT DISTINCT username, email FROM users WHERE role='student'")
     students = cursor.fetchall()
 
     conn.close()
