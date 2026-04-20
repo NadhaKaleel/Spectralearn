@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Lesson Completed 🎉</h2>
+<p>Total Lessons Completed: {{ progress }}</p>
+
+<button onclick="location.href='/learning'">Do Another Lesson</button>
+{% endblock %}
