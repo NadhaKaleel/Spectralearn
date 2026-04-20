@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="teacher-layout">
+
+    <!-- LEFT SIDEBAR -->
+<div class="teacher-sidebar">
+    <h3>Teacher Dashboard</h3>
+
+    <hr style="margin:18px 0;">
+
+    
+    <a href="/teacher">🎨 Default Settings</a>
+
+    <p style="font-weight:600;">Learning Modules</p>
+
+    <a href="/learning?letter=A">📘 Learn Alphabet</a>
+    <a href="/numbers?number=1">🔢 Learn Numbers</a>
+    <a href="/word_builder?page=0">🧩 Word Builder</a>
+
+    <hr style="margin:18px 0;">
+
+    
+
+    
+    <a href="/dashboard">← Back to Dashboard</a>
+</div>
+
+    <!-- RIGHT CONTENT AREA -->
+    <div class="teacher-content">
+
+        <h2>Students</h2>
+        <hr>
+
+        <!-- KEEP YOUR EXISTING STUDENT LOOP HERE -->
+        {% for student in students %}
+            <div class="profile-card">
+                <h3>{{ student[0] }}</h3>
+                <p><strong>Email;</strong> {{ student[1] }}</p>
+                <a href="{{ url_for('edit_student', username=student[0]) }}">
+                    <button>Edit Sensory Settings</button>
+                </a>
+            </div>
+        {% endfor %}
+
+</div>
+</div>
+
+{% endblock %}

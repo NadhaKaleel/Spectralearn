@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block content %}
+
+<a href="javascript:history.back()" class="back-link">← Back</a>
+
+<div style="text-align:center; padding:40px;">
+
+    <h1>Word Builder</h1>
+    <p style="color:gray;">Learn words from A to Z</p>
+
+    <br>
+
+    <!-- WORD GRID -->
+    <div style="
+        display:flex;
+        justify-content:center;
+        gap:30px;
+        flex-wrap:wrap;
+    ">
+
+        {% for letter, word, image in words %}
+
+        <div style="
+            width:180px;
+            padding:15px;
+            border-radius:12px;
+            background:#f5f7fb;
+            box-shadow:0 4px 12px rgba(0,0,0,0.08);
+            text-align:center;
+        ">
+
+            <h3>{{ letter }} - {{ word }}</h3>
+
+            <img src="{{ url_for('static', filename='images/' + image) }}"
+                 alt="{{ word }}"
+                 style="
+                    width:120px;
+                    height:120px;
+                    object-fit:contain;
+                    margin-top:10px;
+                 ">
+
+            <br><br>
+
+            <!-- 🔊 PRONUNCIATION -->
+            <button onclick="speakWord('{{ word }}')"
+                    style="
+                        padding:8px 12px;
+                        border:none;
+                        border-radius:8px;
+                        background:#6c5ce7;
+                        color:white;
+                        cursor:pointer;
+                    ">
+                🔊 Listen
+            </button>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <br><br>
+
+    <!-- NEXT BUTTON (BUG-FREE VERSION) -->
+    {% if next_page is not none %}
+
+        <form method="GET" action="/word_builder">
+            <input type="hidden" name="page" value="{{ next_page }}">
+            <button type="submit" style="
+                padding:12px 25px;
+                border:none;
+                border-radius:10px;
+                background:#6c5ce7;
+                color:white;
+                font-size:16px;
+                cursor:pointer;
+            ">
+                Next →
+            </button>
+        </form>
+
+    {% else %}
+
+        <h3>🎉 All Words Completed!</h3>
+
+        <a href="/dashboard">
+            <button style="
+                padding:12px 25px;
+                border:none;
+                border-radius:10px;
+                background:#00b894;
+                color:white;
+                font-size:16px;
+            ">
+                Back to Dashboard
+            </button>
+        </a>
+
+    {% endif %}
+
+</div>
+
+<!-- 🔊 SPEECH SCRIPT -->
+<script>
+function speakWord(word) {
+    let speech = new SpeechSynthesisUtterance(word);
+    speech.rate = 0.8;
+    speech.pitch = 1;
+    window.speechSynthesis.speak(speech);
+}
+</script>
+
+{% endblock %}

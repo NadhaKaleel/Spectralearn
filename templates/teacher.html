@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<a href="/dashboard" class="back-button">Back to Dashboard</a>
+<div style="max-width:600px; margin:auto; padding:40px;">
+
+    <h2>Teacher Sensory Settings</h2>
+
+    <form method="POST" action="/save_settings">
+
+        <!-- THEME -->
+<div class="settings-section">
+    <label><strong>Choose Theme:</strong></label>
+    <select name="theme">
+        <option value="" {% if not session.get('theme') %}selected{% endif %}>Default</option>
+        <option value="soft-blue" {% if session.get('theme') == 'soft-blue' %}selected{% endif %}>Soft Blue</option>
+        <option value="soft-pink" {% if session.get('theme') == 'soft-pink' %}selected{% endif %}>Soft Pink</option>
+        <option value="soft-green" {% if session.get('theme') == 'soft-green' %}selected{% endif %}>Soft Green</option>
+        <option value="lavender" {% if session.get('theme') == 'lavender' %}selected{% endif %}>Lavender</option>
+        <option value="soft-peach" {% if session.get('theme') == 'soft-peach' %}selected{% endif %}>Soft Peach</option>
+        <option value="soft-yellow" {% if session.get('theme') == 'soft-yellow' %}selected{% endif %}>Soft Yellow</option>
+        <option value="cream" {% if session.get('theme') == 'cream' %}selected{% endif %}>Cream</option>
+        <option value="aqua" {% if session.get('theme') == 'aqua' %}selected{% endif %}>Light Aqua</option>
+    </select>
+</div>
+
+
+<!-- FONT SIZE -->
+<div class="settings-section">
+    <label><strong>Font Size:</strong></label>
+    <select name="font_size">
+        <option value="small" {% if session.get('font_size') == 'small' %}selected{% endif %}>Small</option>
+        <option value="medium" {% if session.get('font_size') == 'medium' %}selected{% endif %}>Medium</option>
+        <option value="large" {% if session.get('font_size') == 'large' %}selected{% endif %}>Large</option>
+        <option value="xlarge" {% if session.get('font_size') == 'xlarge' %}selected{% endif %}>Extra Large</option>
+    </select>
+</div>
+
+
+<!-- FONT FAMILY -->
+<div class="settings-section">
+    <label><strong>Font Style:</strong></label>
+    <select name="font_family">
+        <option value="arial" {% if session.get('font_family') == 'arial' %}selected{% endif %}>Arial</option>
+        <option value="verdana" {% if session.get('font_family') == 'verdana' %}selected{% endif %}>Verdana</option>
+        <option value="century" {% if session.get('font_family') == 'century' %}selected{% endif %}>Century Gothic</option>
+        <option value="lexend" {% if session.get('font_family') == 'lexend' %}selected{% endif %}>Lexend</option>
+        <option value="dyslexic" {% if session.get('font_family') == 'dyslexic' %}selected{% endif %}>OpenDyslexic</option>
+    </select>
+</div>
+
+        <button type="submit" style="width:100%;">
+            Save Settings
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

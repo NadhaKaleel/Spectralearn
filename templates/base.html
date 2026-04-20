@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SpectraLearn</title>
+
+    <!-- Google Font: Lexend -->
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<!-- ✅ FIXED BODY (DO NOT CLOSE HERE) -->
+<body class="{{ session.get('theme','') }} {{ session.get('font_size','') }} {{ session.get('font_family','') }}">
+
+<!-- ===== GLOBAL LOADER ===== -->
+<div id="loader" class="loader-wrapper">
+    <div class="loader"></div>
+</div>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="main-nav">
+
+    <!-- LOGO -->
+    <div class="logo">
+        <span class="spectra">Spectra</span>
+        <span class="learn">Learn</span>
+    </div>
+
+    <!-- NAV LINKS -->
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#features">Features</a></li>
+        <li><a href="/#contact">Contact</a></li>
+
+        {% if session.get("user") %}
+            <li><a href="/dashboard" class="nav-btn">Dashboard</a></li>
+            <li><a href="/logout" class="nav-outline">Logout</a></li>
+        {% else %}
+            <li><a href="/login" class="nav-outline">Login</a></li>
+            <li><a href="/register" class="nav-btn">Register</a></li>
+        {% endif %}
+    </ul>
+
+    <!-- Calm Mode Button -->
+    <button onclick="toggleMode()" class="nav-outline">
+        🌸 Calm Mode
+    </button>
+
+</nav>
+
+<!-- ===== PAGE CONTENT ===== -->
+<div class="content">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<footer style="text-align:center; padding:20px; opacity:0.6;">
+    © 2026 SpectraLearn | Inclusive Learning Platform
+</footer>
+
+<!-- ===== CALM MODE SCRIPT ===== -->
+<script>
+function toggleMode() {
+    document.body.classList.toggle("calm-mode");
+
+    if (document.body.classList.contains("calm-mode")) {
+        sessionStorage.setItem("calmMode", "on");
+    } else {
+        sessionStorage.setItem("calmMode", "off");
+    }
+}
+
+// Load calm mode on refresh
+window.onload = function () {
+    if (sessionStorage.getItem("calmMode") === "on") {
+        document.body.classList.add("calm-mode");
+    }
+};
+</script>
+
+</body>
+</html>

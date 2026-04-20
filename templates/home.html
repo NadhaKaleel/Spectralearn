@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="home-container">
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <h1>Inclusive & Calm Learning Platform</h1>
+        <h2>Designed for Children with Autism Spectrum Disorder (ASD)</h2>
+
+        <p>
+            SpectraLearn is a sensory-friendly educational platform designed 
+            to provide structured, accessible, and engaging learning experiences for children with Autism Spectrum Disorder.
+        </p>
+        <p style="margin-top:10px; opacity:0.7;">
+             Supports calm mode, dyslexia-friendly fonts, and customizable sensory settings.
+        </p>
+
+        <div class="hero-buttons">
+            {% if session.get("user") %}
+                <a href="/dashboard"><button>Start Learning</button></a>
+            {% else %}
+                <a href="/register"><button>Start Learning</button></a>
+                <a href="/login"><button class="outline-btn">Login</button></a>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about" id="about">
+        <h2>About SpectraLearn</h2>
+        <p>
+            Our mission is to create a structured, sensory-sensitive 
+            learning environment for children with Autism Spectrum Disorder.
+            The platform includes Alphabet Learning, Number Learning,
+            and Calm Word Builder modules with customizable sensory settings.
+        </p>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="features" id="features">
+
+    <h2>Platform Features</h2>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+            <div class="feature-icon">🎮</div>
+            <h3>Interactive Modules</h3>
+            <p>Alphabet Learning, Number Learning and Calm Word Builder activities.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+            <h3>Sensory-Friendly Themes</h3>
+            <p>Soft pastel colors designed to reduce overstimulation.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🔤</div>
+            <h3>Dyslexia-Friendly Font</h3>
+            <p>OpenDyslexic font option for improved readability.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Progress Tracking</h3>
+            <p>Monitor learning progress across modules.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="contact" id="contact">
+    <h2>Contact</h2>
+    <p>Email: support@spectralearn.com</p>
+</section>
+
+</div>
+
+
+{% endblock %}
+

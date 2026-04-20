@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="dashboard-container">
+
+    <!-- LEFT PANEL -->
+    <div class="dashboard-left">
+
+        {% if role == "student" %}
+
+            <h2>Learning Modules</h2>
+
+            <div class="dashboard-grid">
+
+                <a href="/learning?page=0" class="dashboard-card">
+                    <h3>📘 Learn Alphabet</h3>
+                    <p>Interactive alphabet learning</p>
+                </a>
+
+                <a href="/numbers?number=1" class="dashboard-card">
+                    <h3>🔢 Learn Numbers</h3>
+                    <p>Practice numbers 1–20</p>
+                </a>
+
+                <a href="/word_builder?page=0" class="dashboard-card">
+                    <h3>🧩 Calm Word Builder</h3>
+                    <p>Structured word learning with visuals and pronounciation</p>
+                </a>
+                
+                <a href="{{ url_for('emotions') }}" class="dashboard-card">
+                    <h3>😊 Emotions Lab</h3>
+                    <p>Learn emotional expressions</p>
+                </a>
+                <a href="/word_activity" class="dashboard-card">
+    <h3>🎯 Word Activity</h3>
+    <p>Choose the correct word for each image</p>
+</a>
+
+            </div>
+
+        {% elif role == "teacher" %}
+
+            <h2>Teacher Panel</h2>
+
+            <div class="dashboard-grid">
+
+                <a href="/teacher_dashboard" class="dashboard-card">
+                    <h3>👥 Student List</h3>
+                    <p>View & edit student sensory settings</p>
+                </a>
+
+                <a href="/teacher" class="dashboard-card">
+                    <h3>🎨 Default Sensory Settings</h3>
+                    <p>Configure platform defaults</p>
+                </a>
+
+                <a href="/learning?letter=A" class="dashboard-card">
+                    <h3>📘 Learn Alphabet</h3>
+                    <p>Preview learning module</p>
+                </a>
+
+                <a href="/numbers?number=1" class="dashboard-card">
+                    <h3>🔢 Learn Numbers</h3>
+                    <p>Preview number module</p>
+                </a>
+
+                <a href="/word_builder?page=0" class="dashboard-card">
+                    <h3>🧩 Word Builder</h3>
+                    <p>Preview word builder</p>
+                </a>
+
+                
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="dashboard-right">
+
+        {% if role == "student" %}
+
+            <h2>Your Progress</h2>
+
+            {% set letter_progress = session.get('letter_progress', 0) %}
+            {% set number_progress = session.get('number_progress', 0) %}
+
+            <p>Alphabet Progress: {{ letter_progress }}/26</p>
+            <div class="progress-bar">
+                <div class="progress-fill"
+                     style="width: {{ (letter_progress/26*100)|int }}%;">
+                </div>
+            </div>
+
+            <br>
+
+            <p>Number Progress: {{ number_progress }}/20</p>
+            <div class="progress-bar">
+                <div class="progress-fill"
+                     style="width: {{ (number_progress/20*100)|int }}%;">
+                </div>
+            </div>
+
+            <br>
+
+{% set word_progress = session.get('word_progress', 0) %}
+
+<p>Word Builder Progress: {{ word_progress }}/26</p>
+<div class="progress-bar">
+    <div class="progress-fill"
+         style="width: {{ (word_progress/26*100)|int }}%;">
+    </div>
+</div>
+
+        {% elif role == "teacher" %}
+
+            <h2>System Overview</h2>
+            <p>Manage students, review modules, and configure sensory settings.</p>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

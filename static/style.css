@@ -1,0 +1,653 @@
+/* ===== GLOBAL ===== */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #e4e4ea;
+    color: #000000;
+    font-size: 18px;
+    line-height: 1.6;
+    transition: 0.4s ease;
+}
+
+/* ===== NAVBAR ===== */
+
+nav {
+    background-color: #cdb4db;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .logo {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    cursor: pointer;
+    position: relative;
+}
+
+.spectra {
+    font-size: 52px;
+    font-weight: 900;
+    color: #2e1f4f;
+}
+
+.learn {
+    font-size: 40px;
+    font-weight: 900;
+    color: #7c5cbf;
+}
+
+nav .logo::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, #2e1f4f, #7c5cbf);
+    border-radius: 5px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: #000000;
+}
+
+/* ===== CONTENT ===== */
+
+.content {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 0 30px;
+}
+
+/* ===== HEADINGS ===== */
+
+h1 { font-size: 52px; font-weight: 900; }
+h2 { font-size: 36px; font-weight: bold; }
+h3 { font-size: 26px; }
+p { font-size: 18px; }
+
+/* ===== BUTTONS ===== */
+
+button {
+    padding: 14px 30px;
+    background-color: #6c5ce7;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background-color: #5848c2;
+    transform: translateY(-2px);
+}
+
+/* ===== PROFILE CARD ===== */
+
+.profile-card {
+    background: white;
+    padding: 35px;
+    margin: 40px auto;
+    width: 420px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    text-align: left;
+    transition: 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
+}
+
+/* ===== LEARNING BOX ===== */
+
+.learning-box {
+    background-color: #3a3a44;
+    padding: 50px;
+    border-radius: 20px;
+    width: 70%;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+.letter {
+    font-size: 130px;
+    font-weight: 900;
+    color: white;
+}
+
+/* ===== MODULE GRID ===== */
+
+.module-container {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.module-title {
+    font-size: 42px;
+    margin-bottom: 40px;
+    color: #2e1f4f;
+}
+
+.module-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+/* Single clean module-card style */
+
+.module-card {
+    display: block;
+    background: white;
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 18px;
+    text-decoration: none;
+    color: #2e1f4f;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+
+.module-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 35px rgba(0,0,0,0.15);
+}
+
+/* ===== DASHBOARD GRID (FIXED) ===== */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.dashboard-card {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+    text-decoration: none;
+    color: #2e1f4f;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 35px rgba(0,0,0,0.15);
+}
+
+/* ===== PROGRESS BAR ===== */
+
+.progress-bar {
+    width: 100%;
+    background: #ddd;
+    height: 20px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #6c5ce7;
+    border-radius: 20px;
+}
+
+/* ===== WORD BUILDER ===== */
+
+.word-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.word-card {
+    background: white;
+    padding: 25px;
+    width: 220px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+.word-card:hover {
+    transform: translateY(-5px);
+}
+
+.word-card img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+
+
+/* ===== TEACHER DASHBOARD ===== */
+
+.teacher-layout {
+    display: flex;
+    min-height: 80vh;
+}
+
+.teacher-sidebar {
+    width: 240px;
+    background: white;
+    padding: 25px;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.05);
+    border-radius: 12px;
+}
+
+.teacher-sidebar a {
+    display: block;
+    padding: 12px;
+    margin-bottom: 12px;
+    text-decoration: none;
+    color: #2e1f4f;
+    font-weight: 500;
+    border-radius: 8px;
+}
+
+.teacher-sidebar a:hover {
+    background: #f1eef7;
+}
+
+.teacher-content {
+    flex: 1;
+    padding: 40px;
+}
+
+/* ===== SETTINGS PAGE ===== */
+
+.settings-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px;
+}
+
+.settings-card {
+    background: white;
+    width: 420px;
+    padding: 40px;
+    border-radius: 18px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+}
+
+.settings-section {
+    margin-bottom: 25px;
+}
+
+.settings-section select {
+    width: 100%;
+    height: 45px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.save-btn {
+    width: 100%;
+}
+
+/* ===== CALM MODE ===== */
+
+.calm-mode {
+    background-color: #D8B0C8 !important;
+    color: #000000 !important;
+}
+
+.calm-mode nav {
+    background-color: #BEB9E2 !important;
+}
+
+.calm-mode button {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+/* ===== THEMES ===== */
+
+.soft-blue { background-color: #89CFF0; color: black; }
+.soft-pink { background-color: #FEA3AA; color: black; }
+.soft-green { background-color: #BDFCC9; color: black; }
+.lavender { background-color: #E0BBE4; color: black; }
+.soft-peach { background-color: #F8B88B; color: black; }
+.soft-yellow { background-color: #FFFFBA; color: black; }
+.cream { background-color: #FFFDD0; color: black; }
+.aqua { background-color: #AFEEEE; color: black; }
+
+/* ===== FONT SIZES ===== */
+
+.small { font-size: 16px; }
+.medium { font-size: 20px; }
+.large { font-size: 24px; }
+.xlarge { font-size: 28px; }
+
+/* ===== FONT FAMILIES ===== */
+
+.arial { font-family: Arial, sans-serif; }
+.verdana { font-family: Verdana, sans-serif; }
+.century { font-family: "Century Gothic", sans-serif; }
+.lexend { font-family: 'Lexend', sans-serif; }
+.dyslexic { font-family: 'OpenDyslexic', sans-serif; }
+
+/* ===== FIX HOME ALIGNMENT ===== */
+
+.home-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.about,
+.features {
+    text-align: center;
+    margin-top: 80px;
+}
+
+.about p,
+.features p {
+    max-width: 800px;
+    margin: 20px auto;
+}
+/* ===== MODERN AUTH PAGE ===== */
+
+.auth-page {
+    display: flex;
+    min-height: 85vh;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    padding: 40px;
+    background: linear-gradient(to right, #f3e8ff, #e0f2fe);
+}
+
+.auth-left {
+    max-width: 420px;
+}
+
+.auth-left h1 {
+    font-size: 42px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    color: #2e1f4f;
+}
+
+.auth-left p {
+    font-size: 18px;
+    color: #444;
+}
+
+.auth-card-modern {
+    width: 420px;
+    background: white;
+    padding: 45px;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+}
+
+.auth-card-modern h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-card-modern input,
+.auth-card-modern select {
+    width: 100%;
+    height: 50px;
+    margin-bottom: 18px;
+    padding: 10px 15px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    transition: 0.3s ease;
+}
+
+.auth-card-modern input:focus,
+.auth-card-modern select:focus {
+    border-color: #6c5ce7;
+    outline: none;
+    box-shadow: 0 0 8px rgba(108,92,231,0.2);
+}
+
+.auth-card-modern button {
+    width: 100%;
+    height: 50px;
+    border-radius: 12px;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.auth-switch {
+    text-align: center;
+    margin-top: 20px;
+}
+/* ===== FEATURE CARDS ===== */
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.feature-card {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.feature-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.feature-card h3 {
+    margin-bottom: 12px;
+    color: #2e1f4f;
+}
+
+.feature-card p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* ===== CLEAN BACK LINK BUTTON ===== */
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 25px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    background: #f3f3f7;
+    color: #2e1f4f;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.back-link:hover {
+    background: #e0d4f5;
+}
+
+.default-font {
+    font-family: Arial, sans-serif;
+}
+
+.lexend-font {
+    font-family: 'Lexend', sans-serif;
+}
+
+.dyslexia-font {
+    font-family: 'Comic Sans MS', Arial, sans-serif;
+}
+
+.calm-mode {
+    background-color: #f5f5f5;
+    color: #2c3e50;
+}
+
+/* ===== FORCE APPLY SETTINGS ===== */
+
+/* THEMES */
+body.soft-pink { background-color: #FEA3AA !important; }
+body.soft-blue { background-color: #89CFF0 !important; }
+body.soft-green { background-color: #BDFCC9 !important; }
+body.lavender { background-color: #E0BBE4 !important; }
+body.soft-peach { background-color: #F8B88B !important; }
+body.soft-yellow { background-color: #FFFFBA !important; }
+body.cream { background-color: #FFFDD0 !important; }
+body.aqua { background-color: #AFEEEE !important; }
+
+/* FONT SIZE */
+body.small { font-size: 16px !important; }
+body.medium { font-size: 20px !important; }
+body.large { font-size: 24px !important; }
+body.xlarge { font-size: 28px !important; }
+
+/* FONT FAMILY */
+body.arial { font-family: Arial, sans-serif !important; }
+body.verdana { font-family: Verdana, sans-serif !important; }
+body.century { font-family: "Century Gothic", sans-serif !important; }
+body.lexend { font-family: 'Lexend', sans-serif !important; }
+body.dyslexic { font-family: 'Comic Sans MS', Arial, sans-serif !important; }
+
+
+
+/* ===== EMOTIONS GRID IMPROVEMENT ===== */
+
+.word-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 per row */
+    gap: 30px;
+    padding: 20px;
+}
+
+.word-card img {
+    width: 100%;        /* fill card properly */
+    max-width: 160px;   /* limit size */
+    height: auto;       /* keep ratio (no stretch) */
+    display: block;
+    margin: 10px auto;
+}
+.word-card {
+    width: 100%;
+    max-width: 220px;
+    padding: 20px;
+}
+.word-card:hover img {
+    transform: scale(1.05);
+    transition: 0.3s ease;
+}
+
+.word-card img {
+    cursor: pointer;   /* shows it's clickable */
+    transition: 0.2s ease;
+}
+
+.word-card img:hover {
+    transform: scale(1.05);  /* slight zoom on hover */
+}
+.word-card img:active {
+    transform: scale(0.95);
+}
+
+.hint-text {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #555;
+    font-size: 16px;
+}
+.builder-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.builder-grid .word-card {
+    width: 220px;
+}
+
+/* ===== WORD BUILDER PERFECT ALIGNMENT ===== */
+
+.builder-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 140px); /* fixed small columns */
+    justify-content: center;  /* center whole grid */
+    gap: 20px;
+}
+
+.builder-grid .word-card {
+    width: 140px;
+    padding: 10px;
+    text-align: center;
+    margin: 0 auto;   /* ensures perfect centering */
+}
+
+.builder-grid .word-card img {
+    width: 80px;   /* smaller image */
+    height: auto;
+    display: block;
+    margin: 8px auto;
+}
+
+.dashboard-card,
+.module-card {
+    transition: 0.3s ease;
+}
+
+.dashboard-card:hover,
+.module-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+}
+button {
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+body {
+    transition: background 0.3s ease, color 0.3s ease;
+}
+.button-style {
+    display: inline-block;
+}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="module-container">
+
+    <h1 class="module-title">Choose Learning Module</h1>
+
+    <div class="module-grid">
+
+        <!-- Alphabet -->
+        <a href="/learning?letter=A" class="module-card">
+            <h2>Alphabets</h2>
+            <p>Structured A–Z learning with images & sound</p>
+        </a>
+
+        <!-- Numbers -->
+        <a href="/numbers?number=1" class="module-card">
+            <h2>Numbers</h2>
+            <p>Interactive number learning (1–20)</p>
+        </a>
+
+        <!-- Word Builder -->
+        <a href="/word_builder?page=0" class="module-card">
+            <h2>Word Builder</h2>
+            <p>Match pictures with words activity</p>
+        </a>
+
+    </div>
+
+    <br><br>
+
+    <a href="/dashboard">
+        <button>⬅ Back to Dashboard</button>
+    </a>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="margin-bottom:20px;">
+    <a href="{{ url_for('teacher_dashboard') }}">
+        <button class="button-style">⬅ Back to Student List</button>
+    </a>
+</div>
+
+<div class="settings-wrapper">
+
+    <div class="settings-card">
+
+        <h2 class="settings-title">Edit Sensory Settings</h2>
+        <p class="settings-sub">Student: <strong>{{ username }}</strong><br>
+        Email:{{ email }}
+    </p>
+
+        <form method="POST" action="{{ url_for('update_student_settings', username=username) }}">
+
+            <!-- THEME -->
+            <div class="settings-section">
+                <label>Choose Theme</label>
+                <select name="theme">
+                    <option value="">Default</option>
+                    <option value="soft-blue">Soft Blue</option>
+                    <option value="soft-pink">Soft Pink</option>
+                    <option value="soft-green">Soft Green</option>
+                    <option value="lavender">Lavender</option>
+                    <option value="soft-peach">Soft Peach</option>
+                    <option value="soft-yellow">Soft Yellow</option>
+                    <option value="cream">Cream</option>
+                    <option value="aqua">Light Aqua</option>
+                </select>
+            </div>
+
+            <!-- FONT SIZE -->
+            <div class="settings-section">
+                <label>Font Size</label>
+                <select name="font_size">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                    <option value="xlarge">Extra Large</option>
+                </select>
+            </div>
+
+            <!-- FONT FAMILY -->
+            <div class="settings-section">
+                <label>Font Style</label>
+                <select name="font_family">
+                    <option value="arial">Arial</option>
+                    <option value="verdana">Verdana</option>
+                    <option value="century">Century Gothic</option>
+                    <option value="lexend">Lexend</option>
+                    <option value="dyslexia">OpenDyslexic</option>
+                </select>
+            </div>
+
+            <button type="submit" class="save-btn">
+                Save Changes
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
